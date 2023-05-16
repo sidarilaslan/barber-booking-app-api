@@ -1,17 +1,16 @@
 const { StatusCodes } = require('http-status-codes');
-const { insertUser } = require('../services/user');
+const { insertWorker } = require('../services/worker');
 
 const create = (req, res) => {
-    insertUser(req.body)
+    insertWorker(req.body)
         .then(response => {
             res.status(StatusCodes.CREATED).send(response);
         })
         .catch(e => {
             res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(e);
         });
-
 }
 
 module.exports = {
-    create,
+    create
 }

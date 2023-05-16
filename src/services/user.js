@@ -1,10 +1,10 @@
 const User = require('../models/user');
 
-const insert = (userData) => {
+const insertUser = (userData) => {
     const user = new User(userData);
     return user.save();
 };
 
 module.exports = {
-    insert
+    insertUser
 }

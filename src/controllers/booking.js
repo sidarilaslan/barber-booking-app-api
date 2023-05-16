@@ -1,8 +1,8 @@
 const { StatusCodes } = require('http-status-codes');
-const { insertUser } = require('../services/user');
+const { insertBookings } = require('../services/booking');
 
 const create = (req, res) => {
-    insertUser(req.body)
+    insertBookings(req.body)
         .then(response => {
             res.status(StatusCodes.CREATED).send(response);
         })
