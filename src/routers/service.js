@@ -2,11 +2,19 @@ const express = require('express');
 const router = express.Router();
 const validate = require('../middlewares/validate');
 const serviceSchema = require('../validations/service');
-const { create } = require('../controllers/service');
+const { createService, getService } = require('../controllers/service');
+
 
 router.
     route('/').
-    post(validate(serviceSchema.createValidation), create);
+    get(getService);
+router.
+    route('/:id').
+    get(getService);
+router.
+    route('/').
+    post(validate(serviceSchema.createValidation), createService);
+
 
 
 

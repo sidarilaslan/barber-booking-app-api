@@ -1,10 +1,19 @@
 const Booking = require('../models/booking');
 
-const insertBookings = (bookingData) => {
+const insertBooking = async (bookingData) => {
+
     const booking = new Booking(bookingData);
-    return booking.save();
+    return await booking.save();
 };
 
+const listBooking = async (where) => {
+
+    const booking = await Booking.find(where || {});
+    return booking;
+};
+
+
 module.exports = {
-    insertBookings
+    insertBooking,
+    listBooking
 }

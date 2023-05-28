@@ -1,16 +1,24 @@
 const Worker = require('../models/worker');
-const User = require('../models/user');
+const userService = require('./user');
 
 const insertWorker = async (workerData) => {
-    const user = new User(workerData);
+    const user = await userService.insertUser(workerData);
     workerData.user_id = user._id;
-    return user.save().then(() => {
-        const worker = new Worker(workerData);
-        console.log(worker);
-        return worker.save();
-    });
+
+    const worker = new Worker(workerData);
+    const workerResponse = worker.save();
+
+    return workerResponse.populate("user_id");
 };
 
+const listWorker = async (where) => {
+    const worker = await Worker.find(where || {}).populate({
+        path: "user_id"
+    });
+    return worker;
+}
+
 module.exports = {
-    insertWorker
+    insertWorker,
+    listWorker
 }
