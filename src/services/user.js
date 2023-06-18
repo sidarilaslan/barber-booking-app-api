@@ -10,8 +10,13 @@ const listUser = async (where) => {
     return user;
 }
 
+const removeUser = async (id) => {
+    return await User.findByIdAndDelete(id);
+}
+
 
 module.exports = {
     insertUser,
-    listUser
+    listUser,
+    removeUser
 }

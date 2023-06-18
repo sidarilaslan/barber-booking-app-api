@@ -1,7 +1,7 @@
 const Mongoose = require('mongoose');
 const bookingSchema = new Mongoose.Schema({
     date: Date,
-    lastName: String,
+    name: String,
     requests: String,
     hour: String,
     user_id: {
@@ -11,7 +11,12 @@ const bookingSchema = new Mongoose.Schema({
     worker_id: {
         type: Mongoose.Types.ObjectId,
         ref: "workers"
+    },
+    isDone: {
+        type: Boolean,
+        default: false
     }
+
 }, {
     versionKey: false,
     timestamps: true

@@ -4,7 +4,8 @@ const createValidation = joi.object({
     worker_id: joi.string().required(),
     date: joi.date().required(),
     requests: joi.string(),
-    hour: joi.string().required()
+    hour: joi.string().required(),
+    name: joi.string().required()
 });
 
 

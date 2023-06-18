@@ -18,7 +18,14 @@ const listService = async (where) => {
 
     return services;
 }
+const removeService = async (id) => {
+    return await Service.findByIdAndDelete(id);
+}
+
+
+
 module.exports = {
     insertService,
-    listService
+    listService,
+    removeService
 }

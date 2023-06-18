@@ -8,12 +8,25 @@ const insertBooking = async (bookingData) => {
 
 const listBooking = async (where) => {
 
-    const booking = await Booking.find(where || {});
+    const booking = await Booking.find(where || {}).populate({
+        path: "worker_id",
+        populate: {
+            path: "user_id",
+            select: "_id name lastName phoneNumber"
+        }
+    }).populate({
+        path: "user_id",
+        select: "_id name lastName phoneNumber"
+    });
     return booking;
 };
+const removeBooking = async (id) => {
+    return await Booking.findByIdAndDelete(id);
+}
 
 
 module.exports = {
     insertBooking,
-    listBooking
+    listBooking,
+    removeBooking
 }

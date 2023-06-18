@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const validate = require('../middlewares/validate');
 const userSchemas = require('../validations/user');
-const { createUser, getUser } = require('../controllers/user');
+const { createUser, getUser, deleteUser } = require('../controllers/user');
 
 
 router.
@@ -14,6 +14,9 @@ router.
 router.
     route('/').
     post(validate(userSchemas.createValidation), createUser);
+router.
+    route('/:_id').
+    delete(deleteUser);
 
 
 

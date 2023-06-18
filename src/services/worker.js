@@ -6,7 +6,7 @@ const insertWorker = async (workerData) => {
     workerData.user_id = user._id;
 
     const worker = new Worker(workerData);
-    const workerResponse = worker.save();
+    const workerResponse = await worker.save();
 
     return workerResponse.populate("user_id");
 };
@@ -18,7 +18,16 @@ const listWorker = async (where) => {
     return worker;
 }
 
+const removeWorker = async (id) => {
+    const worker = await Worker.findByIdAndDelete(id);
+    await userService.removeUser(worker.user_id._id);
+
+    return worker.populate("user_id");
+}
+
+
 module.exports = {
     insertWorker,
-    listWorker
+    listWorker,
+    removeWorker
 }
